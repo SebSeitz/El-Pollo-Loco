@@ -9,7 +9,7 @@ class StatusBar extends DrawableObject {
         'img/7.Marcadores/Barra/Marcador vida/azul/100_.png', //image 5
     ];
 
-    percentage = 100;
+   // percentage = 100;
 
 
     constructor() {
@@ -30,13 +30,13 @@ class StatusBar extends DrawableObject {
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;
-        } else if (this.percentage > 80) {
+        } else if (this.percentage > 30) {
             return 4;
-        } else if (this.percentage > 60) {
-            return 3;
-        } else if (this.percentage > 40) {
-            return 2;
         } else if (this.percentage > 20) {
+            return 3;
+        } else if (this.percentage > 10) {
+            return 2;
+        } else if (this.percentage > 5) {
             return 1;
         } else {
             return 0;

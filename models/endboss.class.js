@@ -6,7 +6,7 @@ class Endboss extends MovableObject {
     firstEncounter;
     speed;
     x;
-    energy = 50;
+    energy = 30;
     
     
     
@@ -59,7 +59,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ALARMED);
         this.loadImages(this.IMAGES_ATTACKING);
         this.loadImages(this.IMAGES_wALKING);
-        this.x = 2400;
+        this.x = 2800;
         this.speed = 0.8;
         this.animate();
     }

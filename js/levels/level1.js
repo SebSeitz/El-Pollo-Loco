@@ -1,5 +1,10 @@
+
 const level1 = new Level(
+    
     [
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
         new Chicken(),
         new Chicken(),
         new Chicken(),
@@ -7,39 +12,46 @@ const level1 = new Level(
         new Chicken(),
         new Chicken(),
         new Endboss()
-
     ],
     [
         new Cloud(),
     ],
- 
+  
     [
         new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', -719), //Hintergrundgrafik wird an der x-Koordinate 0 eingefügt
         new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', -719),
         new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', -719),
         new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', -719),
 
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 0), //Hintergrundgrafik wird an der x-Koordinate 0 eingefügt
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 0), 
         new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 0),
         new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 0),
         new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 0),
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719), //Hintergrundgrafik wird an der x-Koordinate 0 eingefügt
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719), 
         new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', 719),
         new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 719),
         new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719),
 
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 2), //Hintergrundgrafik wird an der x-Koordinate 0 eingefügt
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 2),
         new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 719 * 2),
         new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 719 * 2),
         new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 719 * 2),
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 3), //Hintergrundgrafik wird an der x-Koordinate 0 eingefügt
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 3), 
         new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', 719 * 3),
         new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 719 * 3),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719 * 3),
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719 * 3), 
 
-    ],
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 4),
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 719 * 4),
+        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 719 * 4),
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 719 * 4),
+        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 5), 
+        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', 719 * 5),
+        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 719 * 5),
+        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719 * 5),  
 
-  
+    ], 
+
    getLevelCoins(),
 
    [
@@ -50,7 +62,8 @@ const level1 = new Level(
        new Bottle(),
        new Bottle(),
        new Bottle(),
-
+       new Bottle(),
+       new Bottle(),
    ],
 
 )
@@ -63,9 +76,7 @@ function getCoinsCollection(firstX, firstY){
        // new Coin(firstX + 3 *100, firstY -1 *50),
        // new Coin(firstX + 4 *100, firstY -0 *50),
 
-
     ]
-
 }
 
 function getLevelCoins(){

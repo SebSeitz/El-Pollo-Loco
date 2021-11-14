@@ -4,8 +4,9 @@ class Character extends MovableObject {
     speed = 4.5;
     idleTime = 5001;
     lastIdle = new Date().getTime();
-    energy = 80;
+    energy = 50;
     game_music;
+    gameover_audio = new Audio('audio/gameover_comment.mp3');
 
 
     IMAGES_WALKING = [
@@ -136,12 +137,12 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_SLEEPING);
                 }
             }
-        }, 90);
+        }, 110);
     }
     stopGame(interval) {
         clearInterval(interval);
         game_music.pause();
-        world.ctx.clearRect(0, 0, world.canvas.width, world.canvas.height);
+        this.gameover_audio.play();
         document.getElementById('game-title').style.display = "none";
         document.getElementById('canvas').style.display = "none";
         document.getElementById('end-screen-overlay').style.display = "flex";

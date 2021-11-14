@@ -11,7 +11,7 @@ let game_music = new Audio('audio/gamemusic.mp3');
     document.getElementById('fullscreen').classList.remove('d-none');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-   // game_music.play();
+    game_music.play();
     game_music.volume = 0.3;
     console.log('My character is', world['character']);  //Schreibweise world.character auch möglich
 }
@@ -67,5 +67,8 @@ window.addEventListener("keyup", (e) => {
     }
 
 });
+
+
+    
 
 
