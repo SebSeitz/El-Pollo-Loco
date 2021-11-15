@@ -6,7 +6,7 @@ class Endboss extends MovableObject {
     firstEncounter;
     speed;
     x;
-    energy = 30;
+    energy = 50;
     
     
     

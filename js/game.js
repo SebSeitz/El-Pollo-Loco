@@ -21,7 +21,10 @@ function restartGame(){
 }
 
 function getFullscreen(){
+    document.getElementById('canvas').style.backgroundImage = 'none';
     canvas.requestFullscreen();
+    
+ 
 }
 
 window.addEventListener("keydown", (e) => {

@@ -8,7 +8,7 @@ class EndbossBar extends DrawableObject {
         'img/7.Marcadores/Barra/Marcador vida/Naranja/20__1.png',
         'img/7.Marcadores/Barra/Marcador vida/Naranja/0_ .png',
     ];
-    percentage = 50;
+    percentage = 10;
 
     
 

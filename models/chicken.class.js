@@ -19,7 +19,7 @@ class Chicken extends MovableObject {
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png'); //super bedeutet, dass von übergeordneter Methode "MovableObject" etwas aufgerufen wird; nämlich loadImage()
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGE_DEAD);
-        this.x = 900 + Math.random() * 600; //super sagt man nur beim Einrufen von übergeordneten METHODEN/ Zahl zw. 200 u. 700
+        this.x = 850 + Math.random() * 1900; //super sagt man nur beim Einrufen von übergeordneten METHODEN/ Zahl zw. 200 u. 700
         this.speed = 0.6 + Math.random() * 0.7;
         this.animate();
     }

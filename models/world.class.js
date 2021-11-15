@@ -4,6 +4,8 @@ class World extends MovableObject {                       //in Klassen darf man 
     bottle_sound = new Audio('audio/collectBottle.mp3');
     chicken_dead = new Audio('audio/chicken_kill.mp3');
     victory_music = new Audio('audio/victory_music.mp3');
+    character_hurt = new Audio('audio/character_hurt.mp3');
+    endboss_kill = new Audio('audio/endboss_kill.mp3');
     endboss;
     level = level1;
     ctx;
@@ -68,6 +70,7 @@ class World extends MovableObject {                       //in Klassen darf man 
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100, this.character.otherDirection);
             this.throwableObjects.push(bottle);
             this.bottleAmount--;
+            this.bottleBar.setPercentage(this.bottleAmount);
         }
     }
 
@@ -77,6 +80,7 @@ class World extends MovableObject {                       //in Klassen darf man 
             let positionChicken = this.chickenArray.indexOf(enemy);
             if (this.character.isColliding(enemy) && !this.character.isAboveGround() && this.chickenArray[positionChicken].state != 'dead') {
                 this.character.hit();
+                this.character_hurt.play();
                 this.statusBar.setPercentage(this.character.energy);
                 console.log('character energy', this.character.energy);
             } else if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.chickenArray[positionChicken] != 'dead') {
@@ -90,6 +94,7 @@ class World extends MovableObject {                       //in Klassen darf man 
 
         if (this.endboss.isColliding(this.character) && this.endboss.state != 'dead') {
             this.character.hit();
+            this.character_hurt.play();
             this.statusBar.setPercentage(this.character.energy);
             console.log('character energy', this.character.energy);
         }
@@ -121,6 +126,7 @@ class World extends MovableObject {                       //in Klassen darf man 
 
             if (ThrowableObject.isColliding(this.endboss) && this.endboss.state != 'dead') {
                 this.endboss.hit();
+                this.chicken_dead.play();
                 ThrowableObject.bottleHits();
                 console.log('boss is hit', this.endboss);
                 this.endbossBar.setPercentage(this.endboss.energy);
@@ -130,6 +136,7 @@ class World extends MovableObject {                       //in Klassen darf man 
                     this.statusBar.setPercentage(this.character.energy);
                 }
                 if (this.endboss.energy == 0) {
+                    this.endboss_kill.play();
                     setTimeout(() => {
                         this.level.enemies.splice(this.level.enemies.length - 1, 1);
                     }, 2500);
@@ -140,7 +147,7 @@ class World extends MovableObject {                       //in Klassen darf man 
             }
         });
 
-     
+
         this.level.bottles.forEach((bottle) => {
             if (this.character.isColliding(bottle)) {
                 let positionBottle = this.level.bottles.indexOf(bottle);
@@ -168,12 +175,13 @@ class World extends MovableObject {                       //in Klassen darf man 
         }
     }
 
-    showVictoryScreen(){
+    showVictoryScreen() {
         game_music.pause();
         this.victory_music.play();
         document.getElementById('game-title').style.display = "none";
         document.getElementById('canvas').style.display = "none";
         document.getElementById('victory-screen').style.display = "flex";
+        document.getElementById('fullscreen').style.display = "none";
         
     }
 

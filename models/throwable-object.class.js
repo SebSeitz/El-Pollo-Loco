@@ -40,8 +40,6 @@ class ThrowableObject extends MovableObject {
         this.height = 70;
         this.width = 70;
         this.otherDirection = otherDirection;
-        //this.endboss = endboss;
-        //this.movableObjects = movableObjects;
         this.throw();
         this.playBrokenAnimation();
 
