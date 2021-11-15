@@ -36,7 +36,7 @@ class EndbossBar extends DrawableObject {
             return 2;
         } else if (this.percentage > 20) {
             return 3;
-        } else if (this.percentage > 15) {
+        } else if (this.percentage > 5) {
             return 4;
         } else {
             return 5;

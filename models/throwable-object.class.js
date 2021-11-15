@@ -78,6 +78,7 @@ class ThrowableObject extends MovableObject {
         
         if (isFlyLeft) {
             speedX *= -1;
+            this.x = this.x -100;
         }
         setInterval(() => {
             this.x += speedX;

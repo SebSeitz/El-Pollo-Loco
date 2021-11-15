@@ -33,10 +33,10 @@ class MovableObject extends DrawableObject {
         this.energy -= 5;
 
         if (this.energy <= 0) {
-            this.energy = 0; // == funktioniert hier nicht (warum?)
+            this.energy = 0; 
             this.changeState('dead');
         } else {
-            this.lastHit = new Date().getTime(); //speichert Zeit in Zahlenform
+            this.lastHit = new Date().getTime(); 
             this.changeState('hurt');
         }
     }

@@ -12,7 +12,6 @@ class World extends MovableObject {                       //in Klassen darf man 
     canvas;
     keyboard;
     camera_x = 0;   // verschiebt um 100 Pixel nach LINKS auf der x-Achse;
-    //background = new Background();
     statusBar = new StatusBar();
     coinBar = new CoinBar();
     bottleBar = new BottleBar();
@@ -33,7 +32,7 @@ class World extends MovableObject {                       //in Klassen darf man 
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.endboss = this.level.enemies[this.level.enemies.length - 1];
-        this.chickenArray = this.level.enemies.slice(0, -1); //hier splice -1,1 probieren statt slice; oder pop() Methode
+        this.chickenArray = this.level.enemies.slice(0, -1); 
         //this.movableObjects = [this.endboss, this.chickenArray];
         this.draw();
         this.setWorld(); // um Keyboard an andere Objekte weiterzugeben
@@ -199,7 +198,6 @@ class World extends MovableObject {                       //in Klassen darf man 
         this.ctx.fillText(`x ${this.coinAmount}`, 225, 75);
         this.addToMap(this.bottleBar);
         if (!this.endboss) {
-            // this.ctx.clearRect(this.endbossBar.x, this.endbossBar.y, this.endbossBar.width, this.endbossBar.height); --> wieso ist das nicht transparent?
             delete this.endbossBar;
         } else if (this.character.x > this.endboss.x - 500) {
             this.addToMap(this.endbossBar);
@@ -245,11 +243,11 @@ class World extends MovableObject {                       //in Klassen darf man 
     }
 
     flipImage(mo) {
-        this.ctx.save();        //speichert aktuelle Einstellungen des Kontexts
+        this.ctx.save();                //speichert aktuelle Einstellungen des Kontexts
         this.ctx.translate(mo.width, 0);
         this.ctx.scale(-1, 1);
-        mo.x = mo.x * -1;       // dreht x-Koordinate um
-    }
+        mo.x = mo.x * -1;                // dreht x-Koordinate um
+    }       
 
     flipImageBack(mo) {
         mo.x = mo.x * -1
