@@ -32,7 +32,7 @@ class World extends MovableObject {                       //in Klassen darf man 
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.endboss = this.level.enemies[this.level.enemies.length - 1];
-        this.chickenArray = this.level.enemies.slice(0, -1); 
+        this.chickenArray = this.level.enemies.slice(0, -1);
         //this.movableObjects = [this.endboss, this.chickenArray];
         this.draw();
         this.setWorld(); // um Keyboard an andere Objekte weiterzugeben
@@ -74,7 +74,27 @@ class World extends MovableObject {                       //in Klassen darf man 
     }
 
     checkCollisions() {
+        this.checkChickenCollision();
+        this.checkEndbossCollision();
+        this.checkCoinsCollision();
+        this.checkBottleCollision();
+      
 
+
+        
+
+        this.level.bottles.forEach((bottle) => {
+            if (this.character.isColliding(bottle)) {
+                let positionBottle = this.level.bottles.indexOf(bottle);
+                this.level.bottles.splice(positionBottle, 1);
+                this.bottle_sound.play();
+                this.bottleAmount++;
+                this.bottleBar.setPercentage(this.bottleAmount);
+            }
+        });
+    }
+
+    checkChickenCollision() {
         this.chickenArray.forEach((enemy) => {
             let positionChicken = this.chickenArray.indexOf(enemy);
             if (this.character.isColliding(enemy) && !this.character.isAboveGround() && this.chickenArray[positionChicken].state != 'dead') {
@@ -86,18 +106,20 @@ class World extends MovableObject {                       //in Klassen darf man 
                 this.chickenArray[positionChicken].state == 'dead';
                 this.characterBounce(positionChicken);
                 enemy.hit();
-
-
             }
         });
+    }
 
+    checkEndbossCollision() {
         if (this.endboss.isColliding(this.character) && this.endboss.state != 'dead') {
             this.character.hit();
             this.character_hurt.play();
             this.statusBar.setPercentage(this.character.energy);
             console.log('character energy', this.character.energy);
         }
+    }
 
+    checkCoinsCollision() {
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)) {
                 console.log('collected Coin', coin);
@@ -108,20 +130,12 @@ class World extends MovableObject {                       //in Klassen darf man 
                 this.coinBar.setPercentage(this.coinAmount);
             }
         });
+    }
+
+    checkBottleCollision(){
         this.throwableObjects.forEach((ThrowableObject) => {
-            this.chickenArray.forEach((chicken) => {
-                if (chicken.isColliding(ThrowableObject)) {
-                    let positionChicken = this.chickenArray.indexOf(chicken);
-                    this.chickenArray[positionChicken].hit();
-                    ThrowableObject.bottleHits();
-                    console.log(ThrowableObject);
-                    //ThrowableObject.playAnimation()
-                    this.chickenArray[positionChicken].state == 'dead';
-                    // setTimeout(() => {
-                    //   this.chickenArray.splice(positionChicken,1);
-                    //}, 2000);
-                }
-            });
+            this.bottleOnChicken(ThrowableObject);
+           
 
             if (ThrowableObject.isColliding(this.endboss) && this.endboss.state != 'dead') {
                 this.endboss.hit();
@@ -146,16 +160,17 @@ class World extends MovableObject {                       //in Klassen darf man 
             }
         });
 
+    }
 
-        this.level.bottles.forEach((bottle) => {
-            if (this.character.isColliding(bottle)) {
-                let positionBottle = this.level.bottles.indexOf(bottle);
-                this.level.bottles.splice(positionBottle, 1);
-                this.bottle_sound.play();
-                this.bottleAmount++;
-                this.bottleBar.setPercentage(this.bottleAmount);
-            }
-        });
+    bottleOnChicken(object){ this.chickenArray.forEach((chicken) => {
+        if (chicken.isColliding(object)) {
+            let positionChicken = this.chickenArray.indexOf(chicken);
+            this.chickenArray[positionChicken].hit();
+            object.bottleHits();
+            this.chickenArray[positionChicken].state == 'dead';
+        }
+    });
+
     }
 
     characterBounce(position) {
@@ -181,7 +196,7 @@ class World extends MovableObject {                       //in Klassen darf man 
         document.getElementById('canvas').style.display = "none";
         document.getElementById('victory-screen').style.display = "flex";
         document.getElementById('fullscreen').style.display = "none";
-        
+
     }
 
 
@@ -247,7 +262,7 @@ class World extends MovableObject {                       //in Klassen darf man 
         this.ctx.translate(mo.width, 0);
         this.ctx.scale(-1, 1);
         mo.x = mo.x * -1;                // dreht x-Koordinate um
-    }       
+    }
 
     flipImageBack(mo) {
         mo.x = mo.x * -1
