@@ -146,6 +146,7 @@ class Character extends MovableObject {
         document.getElementById('game-title').style.display = "none";
         document.getElementById('canvas').style.display = "none";
         document.getElementById('end-screen-overlay').style.display = "flex";
+        document.getElementById('fullscreen').style.display = "none";
     }
 
 }

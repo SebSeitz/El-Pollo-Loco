@@ -78,10 +78,7 @@ class World extends MovableObject {                       //in Klassen darf man 
         this.checkEndbossCollision();
         this.checkCoinsCollision();
         this.checkBottleCollision();
-      
 
-
-        
 
         this.level.bottles.forEach((bottle) => {
             if (this.character.isColliding(bottle)) {
@@ -132,140 +129,161 @@ class World extends MovableObject {                       //in Klassen darf man 
         });
     }
 
-    checkBottleCollision(){
+    checkBottleCollision() {
         this.throwableObjects.forEach((ThrowableObject) => {
             this.bottleOnChicken(ThrowableObject);
-           
+            this.bottleOnEndboss(ThrowableObject)
 
-            if (ThrowableObject.isColliding(this.endboss) && this.endboss.state != 'dead') {
-                this.endboss.hit();
-                this.chicken_dead.play();
-                ThrowableObject.bottleHits();
-                console.log('boss is hit', this.endboss);
-                this.endbossBar.setPercentage(this.endboss.energy);
-                console.log('endboss energy', this.endboss.energy);
-                if (this.endboss.isColliding(this.character)) {
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy);
-                }
-                if (this.endboss.energy == 0) {
-                    this.endboss_kill.play();
-                    setTimeout(() => {
-                        this.level.enemies.splice(this.level.enemies.length - 1, 1);
-                    }, 2500);
-                    setTimeout(() => {
-                        this.showVictoryScreen();
-                    }, 3000);
-                }
+        });
+
+    }
+
+    bottleOnChicken(object) {
+        this.chickenArray.forEach((chicken) => {
+            if (chicken.isColliding(object)) {
+                let positionChicken = this.chickenArray.indexOf(chicken);
+                this.chickenArray[positionChicken].hit();
+                object.bottleHits();
+                this.chickenArray[positionChicken].state == 'dead';
             }
         });
 
     }
 
-    bottleOnChicken(object){ this.chickenArray.forEach((chicken) => {
-        if (chicken.isColliding(object)) {
-            let positionChicken = this.chickenArray.indexOf(chicken);
-            this.chickenArray[positionChicken].hit();
-            object.bottleHits();
-            this.chickenArray[positionChicken].state == 'dead';
-        }
-    });
-
+    bottleOnEndboss(object) {
+        this.checkBottleonEndbossHit(object);
+        this.checkEndbossToCharacterHit();
+        this.checkIfBossisDead();
+  
     }
 
-    characterBounce(position) {
-        if (this.chickenArray[position].state != 'dead') {
-            this.character.speedY = 15;
-            this.character.x += 10;
-            this.bounce_sound.play();
+    checkBottleonEndbossHit(object){
+        if (object.isColliding(this.endboss) && this.endboss.state != 'dead') {
+            this.endboss.hit();
             this.chicken_dead.play();
+            object.bottleHits();
+            console.log('boss is hit', this.endboss);
+            this.endbossBar.setPercentage(this.endboss.energy);
+            console.log('endboss energy', this.endboss.energy);
         }
     }
 
-    checkEnergy() {
-        if (this.character.energy >= 0) {
-            console.log('Character is Dead');
-            this.character.state == 'dead';
+    checkEndbossToCharacterHit(){
+        if (this.endboss.isColliding(this.character)) {
+            this.character.hit();
+            this.statusBar.setPercentage(this.character.energy);
         }
     }
 
-    showVictoryScreen() {
-        game_music.pause();
-        this.victory_music.play();
-        document.getElementById('game-title').style.display = "none";
-        document.getElementById('canvas').style.display = "none";
-        document.getElementById('victory-screen').style.display = "flex";
-        document.getElementById('fullscreen').style.display = "none";
-
-    }
-
-
-    draw() {  // draw-Methode wird durch Grafikkarte ausgeführt
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);    //löscht den Canvas, damit wieder etwas neu gezeichnet werden kann;
-
-        this.ctx.translate(this.camera_x, 0);                                //translate: verschiebt etwas (canvas) um eine gewisse Variable;
-        this.addObjectsToMap(this.level.backgroundObjects);
-        //Reihenfolge bei draw-Methode ist wichtig; background muss zuerst gezeichnet werden          
-        this.ctx.translate(-this.camera_x, 0);      //backward
-        this.addToMap(this.statusBar);
-        this.addToMap(this.coinBar);
-        this.ctx.font = "16px Verdana";
-        this.ctx.fillText(`x ${this.coinAmount}`, 225, 75);
-        this.addToMap(this.bottleBar);
-        if (!this.endboss) {
-            delete this.endbossBar;
-        } else if (this.character.x > this.endboss.x - 500) {
-            this.addToMap(this.endbossBar);
+    checkIfBossisDead(){
+        if (this.endboss.energy == 0) {
+            this.endboss_kill.play();
+            setTimeout(() => {
+                this.level.enemies.splice(this.level.enemies.length - 1, 1);
+            }, 2500);
+            setTimeout(() => {
+                this.showVictoryScreen();
+            }, 3000);
         }
-        this.ctx.translate(this.camera_x, 0);       //forward
-
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.bottles);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.throwableObjects);
-
-        this.ctx.translate(-this.camera_x, 0);
-
-
-
-
-        let self = this;                            //durch "this" greift man auf alle Variablen aus dieser KLasse (hier oben) zu
-        requestAnimationFrame(function () {
-            self.draw();
-        });                                         //draw-Methode wird mehrfach aufgerufen (normal bei Spielen) --> wird so oft aufgerufen, wie es Grafikkarte hergibt
-        // requestAnimationFrame wird ausgeführt, sobald darüber gezeichnet wurde --> wird asynchron, also etwas später ausgeführt!"this" funktioniert bei Objektorientierung innerhalb von requestAnimation nicht!!!
     }
 
-    addObjectsToMap(objects) {
-        objects.forEach(o => {
-            this.addToMap(o);
-        });
+
+
+
+characterBounce(position) {
+    if (this.chickenArray[position].state != 'dead') {
+        this.character.speedY = 15;
+        this.character.x += 10;
+        this.bounce_sound.play();
+        this.chicken_dead.play();
+    }
+}
+
+checkEnergy() {
+    if (this.character.energy >= 0) {
+        console.log('Character is Dead');
+        this.character.state == 'dead';
+    }
+}
+
+showVictoryScreen() {
+    game_music.pause();
+    this.endboss_kill.pause();
+    this.victory_music.play();
+    document.getElementById('game-title').style.display = "none";
+    document.getElementById('canvas').style.display = "none";
+    document.getElementById('victory-screen').style.display = "flex";
+    document.getElementById('fullscreen').style.display = "none";
+
+}
+
+
+draw() {  // draw-Methode wird durch Grafikkarte ausgeführt
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);    //löscht den Canvas, damit wieder etwas neu gezeichnet werden kann;
+
+    this.ctx.translate(this.camera_x, 0);                                //translate: verschiebt etwas (canvas) um eine gewisse Variable;
+    this.addObjectsToMap(this.level.backgroundObjects);
+    //Reihenfolge bei draw-Methode ist wichtig; background muss zuerst gezeichnet werden          
+    this.ctx.translate(-this.camera_x, 0);      //backward
+    this.addToMap(this.statusBar);
+    this.addToMap(this.coinBar);
+    this.ctx.font = "16px Verdana";
+    this.ctx.fillText(`x ${this.coinAmount}`, 225, 75);
+    this.addToMap(this.bottleBar);
+    if (!this.endboss) {
+        delete this.endbossBar;
+    } else if (this.character.x > this.endboss.x - 500) {
+        this.addToMap(this.endbossBar);
+    }
+    this.ctx.translate(this.camera_x, 0);       //forward
+
+    this.addToMap(this.character);
+    this.addObjectsToMap(this.level.clouds);
+    this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.bottles);
+    this.addObjectsToMap(this.level.coins);
+    this.addObjectsToMap(this.throwableObjects);
+
+    this.ctx.translate(-this.camera_x, 0);
+
+
+
+
+    let self = this;                            //durch "this" greift man auf alle Variablen aus dieser KLasse (hier oben) zu
+    requestAnimationFrame(function () {
+        self.draw();
+    });                                         //draw-Methode wird mehrfach aufgerufen (normal bei Spielen) --> wird so oft aufgerufen, wie es Grafikkarte hergibt
+    // requestAnimationFrame wird ausgeführt, sobald darüber gezeichnet wurde --> wird asynchron, also etwas später ausgeführt!"this" funktioniert bei Objektorientierung innerhalb von requestAnimation nicht!!!
+}
+
+addObjectsToMap(objects) {
+    objects.forEach(o => {
+        this.addToMap(o);
+    });
+}
+
+addToMap(mo) {
+    if (mo.otherDirection) {
+        this.flipImage(mo);
+    }
+    mo.draw(this.ctx);
+    // mo.drawFrame(this.ctx)
+
+    if (mo.otherDirection) {
+        this.flipImageBack(mo);
     }
 
-    addToMap(mo) {
-        if (mo.otherDirection) {
-            this.flipImage(mo);
-        }
-        mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx)
+}
 
-        if (mo.otherDirection) {
-            this.flipImageBack(mo);
-        }
+flipImage(mo) {
+    this.ctx.save();                //speichert aktuelle Einstellungen des Kontexts
+    this.ctx.translate(mo.width, 0);
+    this.ctx.scale(-1, 1);
+    mo.x = mo.x * -1;                // dreht x-Koordinate um
+}
 
-    }
-
-    flipImage(mo) {
-        this.ctx.save();                //speichert aktuelle Einstellungen des Kontexts
-        this.ctx.translate(mo.width, 0);
-        this.ctx.scale(-1, 1);
-        mo.x = mo.x * -1;                // dreht x-Koordinate um
-    }
-
-    flipImageBack(mo) {
-        mo.x = mo.x * -1
-        this.ctx.restore();
-    }
+flipImageBack(mo) {
+    mo.x = mo.x * -1
+    this.ctx.restore();
+}
 }
