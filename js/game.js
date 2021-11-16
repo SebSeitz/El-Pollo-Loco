@@ -3,7 +3,10 @@ let world;
 let keyboard = new Keyboard();
 let game_music = new Audio('audio/gamemusic.mp3');
 
-
+/**
+ * This function hides the start screen overlay and shows the canvas, i.e. starts the game
+ * 
+ */
  function startGame() {
     document.getElementById('start-screen-overlay').style.display = 'none';
     document.getElementById('canvas').classList.remove('d-none');
@@ -19,6 +22,7 @@ let game_music = new Audio('audio/gamemusic.mp3');
 function restartGame(){
     location.reload()
 }
+
 
 function getFullscreen(){
     document.getElementById('canvas').style.backgroundImage = 'none';
