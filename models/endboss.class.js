@@ -7,9 +7,9 @@ class Endboss extends MovableObject {
     speed;
     x;
     energy = 50;
-    
-    
-    
+
+
+
 
     IMAGES_ALARMED = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G5.png',
@@ -65,6 +65,12 @@ class Endboss extends MovableObject {
     }
 
     animate() {
+        this.playStateOfEndbossAnimations();
+        this.playMovementAnimations();
+        this.setEndbossMovement();
+    }
+
+    playStateOfEndbossAnimations() {
         setInterval(() => {
             if (this.isHurt() && this.state == 'hurt') {
                 const currentFrame = this.playAnimation(this.IMAGES_HURT);
@@ -75,8 +81,9 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
             }
         }, 200);
+    }
 
-
+    playMovementAnimations() {
         setInterval(() => {
             let currentTime = new Date().getTime();
             if (this.firstEncounter && this.state == 'walk') {
@@ -92,13 +99,13 @@ class Endboss extends MovableObject {
                 }
             }
         }, 200);
+    }
 
+    setEndbossMovement() {
         setInterval(() => {
-
             let currentTime = new Date().getTime();
 
             if (this.firstEncounter && this.state != 'dead') {
-
                 let timePassed = currentTime - this.firstEncounter;
 
                 if (timePassed <= 4000) {
@@ -125,6 +132,7 @@ class Endboss extends MovableObject {
         }, 1000 / 60);
     }
 }
+
 
 
 

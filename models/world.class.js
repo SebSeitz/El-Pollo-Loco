@@ -60,7 +60,7 @@ class World extends MovableObject {                       //in Klassen darf man 
     }
 
     /**
-     * this function includes the character class in the world class
+     * This function includes the character class in the world class
      */
 
     setWorld() {
@@ -100,18 +100,14 @@ class World extends MovableObject {                       //in Klassen darf man 
         this.checkEndbossCollision();
         this.checkCoinsCollision();
         this.checkBottleCollision();
+        this.checkCollectingBottles();
 
-
-        this.level.bottles.forEach((bottle) => {
-            if (this.character.isColliding(bottle)) {
-                let positionBottle = this.level.bottles.indexOf(bottle);
-                this.level.bottles.splice(positionBottle, 1);
-                this.bottle_sound.play();
-                this.bottleAmount++;
-                this.bottleBar.setPercentage(this.bottleAmount);
-            }
-        });
     }
+
+
+    /**
+     * This function checks the collision between the character and the chicken mobs and updates the life bar of the character
+     */
 
     checkChickenCollision() {
         this.chickenArray.forEach((enemy) => {
@@ -129,6 +125,10 @@ class World extends MovableObject {                       //in Klassen darf man 
         });
     }
 
+    /**
+     * This function checks the collision between the endboss and the character and updates the lifebar
+     */
+
     checkEndbossCollision() {
         if (this.endboss.isColliding(this.character) && this.endboss.state != 'dead') {
             this.character.hit();
@@ -137,6 +137,10 @@ class World extends MovableObject {                       //in Klassen darf man 
             console.log('character energy', this.character.energy);
         }
     }
+
+    /**
+     * This function checks the collision between the character and the static coins and updates the coinbar
+     */
 
     checkCoinsCollision() {
         this.level.coins.forEach((coin) => {
@@ -151,6 +155,10 @@ class World extends MovableObject {                       //in Klassen darf man 
         });
     }
 
+    /**
+     * this Function checks the collision between a bottle and the enemies
+     */
+
     checkBottleCollision() {
         this.throwableObjects.forEach((ThrowableObject) => {
             this.bottleOnChicken(ThrowableObject);
@@ -159,6 +167,27 @@ class World extends MovableObject {                       //in Klassen darf man 
         });
 
     }
+
+    /**
+     * This function checks the collision between the character and the static bottles and updates the bottlebar
+     */
+
+    checkCollectingBottles(){
+        this.level.bottles.forEach((bottle) => {
+            if (this.character.isColliding(bottle)) {
+                let positionBottle = this.level.bottles.indexOf(bottle);
+                this.level.bottles.splice(positionBottle, 1);
+                this.bottle_sound.play();
+                this.bottleAmount++;
+                this.bottleBar.setPercentage(this.bottleAmount);
+            }
+        });
+    }
+
+    /**
+     * This function checks the collision between a bottle and a chicken mob and applies damage to the chicken
+     * @param {object} object - new instance of ThrowableObject class
+     */
 
     bottleOnChicken(object) {
         this.chickenArray.forEach((chicken) => {
@@ -172,12 +201,22 @@ class World extends MovableObject {                       //in Klassen darf man 
 
     }
 
+    /**
+     * This function checks the collision the endboss and the bottles or the character
+     * @param {object} object - new instance of ThrowableObject class
+     */
+
     bottleOnEndboss(object) {
         this.checkBottleonEndbossHit(object);
         this.checkEndbossToCharacterHit();
         this.checkIfBossisDead();
   
     }
+
+    /**
+     * This function checks the collision between the endboss and a bottle and applies damage to endboss
+     * @param {object} object - new instance of ThrowableObject class
+     */
 
     checkBottleonEndbossHit(object){
         if (object.isColliding(this.endboss) && this.endboss.state != 'dead') {
@@ -190,12 +229,19 @@ class World extends MovableObject {                       //in Klassen darf man 
         }
     }
 
+    /**
+     * This function checks the collision between the endboss and the character and applies damage to character
+     */
     checkEndbossToCharacterHit(){
         if (this.endboss.isColliding(this.character)) {
             this.character.hit();
             this.statusBar.setPercentage(this.character.energy);
         }
     }
+
+    /**
+     * This function checks if the endboss is killed and deletes the endboss from the enemies array
+     */
 
     checkIfBossisDead(){
         if (this.endboss.energy == 0) {
@@ -209,7 +255,10 @@ class World extends MovableObject {                       //in Klassen darf man 
         }
     }
 
-
+    /**
+     * This function adds a bounce animation if the character jumps onto a chicken to kill it
+     * @param {Array.<Object>} position - position of the chicken in the enemies array
+     */
 
 
 characterBounce(position) {
@@ -221,12 +270,20 @@ characterBounce(position) {
     }
 }
 
+/**
+ * This function checks the character's energy and sets its state to 'dead' if the energy equals 0
+ */
+
 checkEnergy() {
     if (this.character.energy >= 0) {
         console.log('Character is Dead');
         this.character.state == 'dead';
     }
 }
+
+/**
+ * This function calls the victory screen once the endboss is killed
+ */
 
 showVictoryScreen() {
     game_music.pause();
@@ -238,6 +295,10 @@ showVictoryScreen() {
     document.getElementById('fullscreen').style.display = "none";
 
 }
+
+/**
+ * This function continously draws all elements onto the canvas after first erasing them
+ */
 
 
 draw() {  // draw-Methode wird durch Grafikkarte ausgeführt
@@ -270,20 +331,32 @@ draw() {  // draw-Methode wird durch Grafikkarte ausgeführt
 
 
 
+    /**
+     * This function tells the browser that you wish to perform an animation
+     */
 
-    let self = this;                            //durch "this" greift man auf alle Variablen aus dieser KLasse (hier oben) zu
+    let self = this;                                  //durch "this" greift man auf alle Variablen aus dieser KLasse (hier oben) zu
     requestAnimationFrame(function () {
         self.draw();
-    });                                         //draw-Methode wird mehrfach aufgerufen (normal bei Spielen) --> wird so oft aufgerufen, wie es Grafikkarte hergibt
+    });                                              //draw-Methode wird mehrfach aufgerufen (normal bei Spielen) --> wird so oft aufgerufen, wie es Grafikkarte hergibt
     // requestAnimationFrame wird ausgeführt, sobald darüber gezeichnet wurde --> wird asynchron, also etwas später ausgeführt!"this" funktioniert bei Objektorientierung innerhalb von requestAnimation nicht!!!
 }
 
+/**
+ * This function loops through all objects and adds them to the canvas
+ * @param {object} objects - one of the objects which have been defined for the game 
+ */
 addObjectsToMap(objects) {
     objects.forEach(o => {
         this.addToMap(o);
     });
 }
 
+
+/**
+ * This function checks the direction of the movable objects
+ * @param {object} mo - movable object
+ */
 addToMap(mo) {
     if (mo.otherDirection) {
         this.flipImage(mo);
@@ -297,6 +370,12 @@ addToMap(mo) {
 
 }
 
+/**
+ * This function flips the image of the movable object around of it faces to the left, i.e. if otherDirection is 'true'
+ * @param {object} mo - movable object
+ */
+
+
 flipImage(mo) {
     this.ctx.save();                //speichert aktuelle Einstellungen des Kontexts
     this.ctx.translate(mo.width, 0);
@@ -304,6 +383,10 @@ flipImage(mo) {
     mo.x = mo.x * -1;                // dreht x-Koordinate um
 }
 
+/**
+ * This function flips the image of the movable object back if otherDirection is 'false'
+ * @param {object} mo - movable object
+ */
 flipImageBack(mo) {
     mo.x = mo.x * -1
     this.ctx.restore();

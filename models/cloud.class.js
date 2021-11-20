@@ -10,6 +10,10 @@ class Cloud extends MovableObject {
         this.animate();
     }
 
+    /**
+     * This function continuously decreases the x-coordinate of the clouds, i.e. makes them move left
+     */
+
     animate() {
         setInterval(() => {           //setInterval führt alles zwischen {} in dem Fall alle 1000 Millisekunden aus
             this.moveLeft();
