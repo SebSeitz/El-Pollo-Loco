@@ -21,12 +21,11 @@ class StatusBar extends DrawableObject {
         this.height = 50;
         this.setPercentage(100);
     }
-    
+
     /**
      * This function changes the image of the lifebar which is rendered in accordance with the character's health
      * @param {number} percentage the amount of energy which the character has left
      */
-
     setPercentage(percentage) {
         this.percentage = percentage; // => 0...5
         let path = this.IMAGES_LIFEBAR[this.resolveImageIndex()];

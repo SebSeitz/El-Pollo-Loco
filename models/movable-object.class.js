@@ -37,7 +37,7 @@ class MovableObject extends DrawableObject {
      * @returns number
      */
 
-    
+
     isColliding(mo) {
         return this.x + this.width > mo.x &&             //this.x+this.width = x-Koordinate rechts unten am Character; mo.x = x-Koordinate links unten am enemy
             this.y + this.height > mo.y-60 &&
@@ -52,10 +52,10 @@ class MovableObject extends DrawableObject {
         this.energy -= 5;
 
         if (this.energy <= 0) {
-            this.energy = 0; 
+            this.energy = 0;
             this.changeState('dead');
         } else {
-            this.lastHit = new Date().getTime(); 
+            this.lastHit = new Date().getTime();
             this.changeState('hurt');
         }
     }
@@ -64,7 +64,6 @@ class MovableObject extends DrawableObject {
      * This function checks if an object was hit within the last few milliseconds
      * @returns - a period of time in which the object is hurt
      */
-
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // Differenz in Millisekunden
         timepassed = timepassed / 1000; // Differenz in Sekunden
@@ -76,9 +75,8 @@ class MovableObject extends DrawableObject {
      * This function sets the character's health to 0
      * @returns - true or false
      */
-
     isDead() {
-        return this.energy == 0; 
+        return this.energy == 0;
     }
 
 
@@ -107,14 +105,13 @@ class MovableObject extends DrawableObject {
     /**
      * This function increases the x-coordinate of an object so that it moves to the right
      */
-
     moveRight() {
         this.x += this.speed;
     }
+
 /**
  * This function decreases the x-coordinate of an object so that it moves to the left
  */
-    
     moveLeft() {
         this.x -= this.speed;
     }
@@ -122,7 +119,6 @@ class MovableObject extends DrawableObject {
     /**
      * This function sets a y-coordinate which is used in the applyGravity function
      */
-
     jump() {
         this.speedY = 23;
     }

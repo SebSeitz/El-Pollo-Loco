@@ -5,9 +5,9 @@ let game_music = new Audio('audio/gamemusic.mp3');
 
 /**
  * This function hides the start screen overlay and shows the canvas, i.e. starts the game
- * 
+ *
  */
- function startGame() {
+function startGame() {
     document.getElementById('start-screen-overlay').style.display = 'none';
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('game-title').style.display = 'flex';
@@ -22,8 +22,7 @@ let game_music = new Audio('audio/gamemusic.mp3');
 /**
  * This function lets the user return to the start screen
  */
-
-function restartGame(){
+function restartGame() {
     location.reload()
 }
 
@@ -31,17 +30,16 @@ function restartGame(){
 /**
  * This function calls fullscreen mode
  */
-function getFullscreen(){
+function getFullscreen() {
     document.getElementById('canvas').style.backgroundImage = 'none';
     canvas.requestFullscreen();
-    
- 
+
+
 }
 
 /**
  * This function sets keys on keydown to true in the keyboard object class
  */
-
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
@@ -86,7 +84,14 @@ window.addEventListener("keyup", (e) => {
 
 });
 
+  
 
-    
+
+
+
+
+
+
+
 
 

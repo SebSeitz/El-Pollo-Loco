@@ -17,6 +17,17 @@ canvas {
     display: none;
 }
 
+.touchpad-container {
+    display: flex;
+    height: 300px;
+    width: 600px;
+}
+
+.pad{
+    width: 60px;
+    height: 60px;
+}
+
 .start-screen-overlay {
     width: 100vw;
     height: 100vh;
@@ -75,15 +86,15 @@ canvas {
     justify-content: center;
     bottom: 32px;
     right: 600px;
-    height: 100px;
-    width: 150px;
+    height: 80px;
+    width: 120px;
     border-radius: 15%;
     font-size: 28px;
     font-family: 'Roboto Condensed', sans-serif;
     background-color: rgb(185, 46, 46);
     color: white;
     cursor: pointer;
-    animation: zoom-in-zoom-out 1s ease infinite;
+    animation: zoom-in-zoom-out 1.7s ease infinite;
 }
 
 .fullscreen img {

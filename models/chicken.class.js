@@ -4,7 +4,7 @@ class Chicken extends MovableObject {
     width = 70;
     energy = 5;
     chicken_dead = new Audio('audio/chicken_kill.mp3');
-    
+
 
     IMAGES_WALKING = [
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png',
@@ -30,7 +30,7 @@ class Chicken extends MovableObject {
     animate() {
         this.chickenMovesLeft();
         this.chickenAnimations();
-      
+
     }
 
     /**
@@ -45,7 +45,6 @@ class Chicken extends MovableObject {
     /**
      * This chicken adds animations to the moving or dead chickens
      */
-
     chickenAnimations(){
         setInterval(() => {
             if (this.energy == 0) {

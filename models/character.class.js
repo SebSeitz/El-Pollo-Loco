@@ -86,7 +86,50 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_SLEEPING);
         this.applyGravity();
         this.animate();
+        this.implementTouchpad();
     }
+
+    implementTouchpad() {
+        this.activateWalking();
+        this.deactivateWalking();
+        this.controlJumping();
+        this.controlThrowing();
+    }
+    activateWalking() {
+        document.getElementById("left-pad").addEventListener("touchstart", function (e) {
+            keyboard.LEFT = true;
+        });
+        document.getElementById("right-pad").addEventListener("touchstart", function (e) {
+            keyboard.RIGHT = true;
+        });
+    }
+    deactivateWalking() {
+        document.getElementById("left-pad").addEventListener("touchend", function (e) {
+            keyboard.LEFT = false;
+        });
+        document.getElementById("right-pad").addEventListener("touchend", function (e) {
+            keyboard.RIGHT = false;
+        });
+    }
+    controlJumping() {
+        document.getElementById("jump-pad").addEventListener("touchstart", function (e) {
+            keyboard.SPACE = true;
+        });
+        document.getElementById("jump-pad").addEventListener("touchend", function (e) {
+            keyboard.SPACE = false;
+        });
+    }
+    controlThrowing() {
+        document.getElementById("throw-pad").addEventListener("touchstart", function (e) {
+            keyboard.D = true;
+        });
+        document.getElementById("throw-pad").addEventListener("touchend", function (e) {
+            keyboard.D = false;
+        });
+    }
+
+
+
     /**
      * This function animates the character
      */
@@ -98,42 +141,60 @@ class Character extends MovableObject {
     /**
      * This function plays the character animations
      */
-
-    characterAnimation(){
+    characterAnimation() {
         let characterAnimationInterval = setInterval(() => {
             if (this.isDead()) {
-                this.lastIdle = 0;
-                this.playAnimation(this.IMAGES_DEAD);
-                setTimeout(() => {
-                    this.stopGame(characterAnimationInterval);
-                }, 2000);
+                this.playDeathAnimation(characterAnimationInterval);
             } else if (this.isHurt()) {
-                this.lastIdle = 0;
-                this.playAnimation(this.IMAGES_HURT);
+                this.playHurtAnimation();
             } else if (this.isAboveGround()) {
-                this.lastIdle = 0;
-                this.playAnimation(this.IMAGES_JUMPING);
+                this.playJumpingAnimation();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.lastIdle = 0;
-                this.playAnimation(this.IMAGES_WALKING);
+                this.playWalkingAnimation();
             } else {
-                if (this.lastIdle == 0) {
-                    this.lastIdle = new Date().getTime();
-                }
-                this.idleTime = new Date().getTime() - this.lastIdle;
-                if (this.idleTime > 2000) {
-                    this.playAnimation(this.IMAGES_IDLE);
-                } if (this.idleTime > 7000) {
-                    this.playAnimation(this.IMAGES_SLEEPING);
-                }
+                this.checkIdleAnmiations();
             }
         }, 110);
+    }
+
+    playDeathAnimation(interval) {
+        this.lastIdle = 0;
+        this.playAnimation(this.IMAGES_DEAD);
+        setTimeout(() => {
+            this.stopGame(interval);
+        }, 2000);
+    }
+
+    playHurtAnimation() {
+        this.lastIdle = 0;
+        this.playAnimation(this.IMAGES_HURT);
+    }
+
+    playJumpingAnimation() {
+        this.lastIdle = 0;
+        this.playAnimation(this.IMAGES_JUMPING);
+    }
+
+    playWalkingAnimation() {
+        this.lastIdle = 0;
+        this.playAnimation(this.IMAGES_WALKING);
+    }
+
+    checkIdleAnmiations() {
+        if (this.lastIdle == 0) {
+            this.lastIdle = new Date().getTime();
+        }
+        this.idleTime = new Date().getTime() - this.lastIdle;
+        if (this.idleTime > 2000) {
+            this.playAnimation(this.IMAGES_IDLE);
+        } if (this.idleTime > 7000) {
+            this.playAnimation(this.IMAGES_SLEEPING);
+        }
     }
 
     /**
      * This function starts the character moving according to the keyboard input
      */
-
     characterMovement() {
         setInterval(() => {
             this.walking_sound.pause();
@@ -158,7 +219,6 @@ class Character extends MovableObject {
      * This function stops the game and shows the game over screen
      * @param {interval} interval - the character animation interval
      */
-
     stopGame(interval) {
         clearInterval(interval);
         game_music.pause();
@@ -168,7 +228,6 @@ class Character extends MovableObject {
         document.getElementById('end-screen-overlay').style.display = "flex";
         document.getElementById('fullscreen').style.display = "none";
     }
-
 }
 
 

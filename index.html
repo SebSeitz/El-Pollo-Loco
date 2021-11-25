@@ -80,9 +80,25 @@
 
     <h1 id="game-title">El Pollo Loco</h1>
 
-    <canvas id="canvas" width="720px" height="480px" class="d-none">
-    
-    </canvas>
+    <canvas id="canvas" width="720px" height="480px" class="d-none"></canvas>
+        <div id="touchpad" class="touchpad-container">
+            <div class="pad-container">
+                -L
+                <button type="button" id="left-pad" class="pad"></button>
+                <button type="button" id="right-pad" class="pad"></button>
+                -R
+            </div>
+            <div class="pad-container">
+                Jump
+                <button type="button" id="jump-pad" class="pad"></button>
+                <button type="button" id="throw-pad" class="pad"></button>
+                Throw
+            </div>
+        </div>
+
+        </div>
+
+
     <div class="fullscreen d-none" id="fullscreen" onclick="getFullscreen()">
         <img src="img/10.icons/fullscreen.png">
     </div>

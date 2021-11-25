@@ -17,10 +17,10 @@ class BottleBar extends DrawableObject {
         this.setPercentage(this.bottleAmount);
 
     }
-      /**
-     * This function changes the image of the bottlebar which is rendered in accordance with the amount of bottles available
-     * @param {number} percentage the amount of bottles available to the character
-     */
+    /**
+   * This function changes the image of the bottlebar which is rendered in accordance with the amount of bottles available
+   * @param {number} bottleAmount the amount of bottles available to the character
+   */
 
     setPercentage(bottleAmount) {
         this.bottleAmount = bottleAmount; // => 0...5
@@ -28,12 +28,13 @@ class BottleBar extends DrawableObject {
         this.img = this.imageCache[path];
     }
 
-     /**
-     * This function checks the amount of bottles and returns a corresponding bottlebar image
-     * @returns - images of the bottlebar array
-     */
+    /**
+   * This function checks the amount of bottles and returns a corresponding bottlebar image
+    * @param {number} bottleAmount
+    * @returns - images of the bottlebar array
+    */
     resolveImageIndex(bottleAmount) {
-        if (bottleAmount== 10) {
+        if (bottleAmount == 10) {
             return 5;
         } else if (bottleAmount > 8) {
             return 4;

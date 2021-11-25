@@ -48,7 +48,6 @@ class ThrowableObject extends MovableObject {
     /**
      * This function plays an animation if a bottle collides with an enemy
      */
-
     playBrokenAnimation() {
         setInterval(() => {
             if (this.isBroken == true) {
@@ -60,14 +59,13 @@ class ThrowableObject extends MovableObject {
     /**
      * This function checks of a bottle is broken i.e. hits an enemy and then sets boolean 'isBroken' to true
      */
-
     bottleHits(){
         if(this.isBroken == false){
             this.glass_sound.play();
             this.isBroken = true;
-        }   
+        }
     }
-    
+
     /**
      * This function adds a throwAnimation if a new ThrowableObject is created
      */
@@ -86,12 +84,10 @@ class ThrowableObject extends MovableObject {
      * This function checks of the character is facing left or right and determines the throwing animation accordingly
      * @param {boolean} isFlyLeft - this boolean describes the direction in which the bottle is flying
      */
-
-
     fly(isFlyLeft) {
         this.throw_sound.play();
         let speedX = 6;
-        
+
         if (isFlyLeft) {
             speedX *= -1;
             this.x = this.x -100;
