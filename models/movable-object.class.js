@@ -101,7 +101,7 @@ class MovableObject extends DrawableObject {
         this.state = value;
         this.currentImage = 0;
     }
-
+    
     /**
      * This function increases the x-coordinate of an object so that it moves to the right
      */

@@ -80,8 +80,8 @@
 
     <h1 id="game-title">El Pollo Loco</h1>
 
-    <canvas id="canvas" width="720px" height="480px" class="d-none"></canvas>
-        <div id="touchpad" class="touchpad-container">
+        <canvas id="canvas" width="720px" height="480px" class="d-none"></canvas>
+        <div id="touchpad" class="d-none">
             <div class="pad-container">
                 -L
                 <button type="button" id="left-pad" class="pad"></button>
@@ -96,12 +96,10 @@
             </div>
         </div>
 
+        <div class="fullscreen d-none" id="fullscreen" onclick="getFullscreen()">
+            <img src="img/10.icons/fullscreen.png">
         </div>
 
-
-    <div class="fullscreen d-none" id="fullscreen" onclick="getFullscreen()">
-        <img src="img/10.icons/fullscreen.png">
-    </div>
 
 
 

@@ -13,17 +13,33 @@ canvas {
     background-image: url('img/5.Fondo/1.png');
 }
 
+.big-box{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column-reverse;
+
+}
+
+.button-box {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column-reverse;
+}
+
 .d-none {
     display: none;
 }
 
 .touchpad-container {
     display: flex;
-    height: 300px;
-    width: 600px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
-.pad{
+.pad {
     width: 60px;
     height: 60px;
 }
@@ -88,6 +104,7 @@ canvas {
     right: 600px;
     height: 80px;
     width: 120px;
+    margin-top: 30px;
     border-radius: 15%;
     font-size: 28px;
     font-family: 'Roboto Condensed', sans-serif;
@@ -139,6 +156,7 @@ canvas {
     height: 100px;
     width: 100vw;
     justify-content: center;
+    align-items: center;
     margin-top: 40px;
 }
 
@@ -178,9 +196,11 @@ h1 {
     0% {
         transform: scale(1, 1);
     }
+
     50% {
         transform: scale(1.2, 1.2);
     }
+
     100% {
         transform: scale(1, 1);
     }
@@ -191,7 +211,7 @@ h1 {
         background-size: unset;
     }
 
-    .fullscreen img{
+    .fullscreen img {
         bottom: 40px;
     }
 }
@@ -201,31 +221,38 @@ h1 {
         flex-direction: column;
         align-items: center;
     }
+
     .start-button {
         margin-bottom: 20px;
         margin-top: 100px;
     }
+
     .controls {
         flex-direction: column;
         margin-left: 0;
     }
+
     .start-screen-overlay {
         background-size: contain;
         background-position: center;
         display: flex;
         background-repeat: no-repeat;
     }
+
     .end-screen-overlay {
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
     }
+
     .victory-box span {
         font-size: 40px;
     }
+
     h1 {
         font-size: 42px;
     }
+
     canvas {
         width: 640px;
         height: 360px;
@@ -245,6 +272,7 @@ h1 {
         width: 580px;
         height: 380px;
     }
+
     h1 {
         font-size: 32px;
     }
@@ -255,6 +283,7 @@ h1 {
         width: 450px;
         height: 350px;
     }
+
     @media(max-width: 480px) {
         canvas {
             width: 340px;

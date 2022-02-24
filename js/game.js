@@ -12,6 +12,8 @@ function startGame() {
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('game-title').style.display = 'flex';
     document.getElementById('fullscreen').classList.remove('d-none');
+    document.getElementById('touchpad').classList.remove('d-none');
+    document.getElementById('touchpad').classList.add('touchpad-container');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     game_music.play();
@@ -84,7 +86,7 @@ window.addEventListener("keyup", (e) => {
 
 });
 
-  
+
 
 
 
