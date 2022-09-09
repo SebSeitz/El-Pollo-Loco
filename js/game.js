@@ -8,6 +8,7 @@ let game_music = new Audio('audio/gamemusic.mp3');
  *
  */
 function startGame() {
+    initLevel();
     document.getElementById('start-screen-overlay').style.display = 'none';
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('game-title').style.display = 'flex';
