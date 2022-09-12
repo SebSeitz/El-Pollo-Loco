@@ -22,8 +22,9 @@ class World extends MovableObject {                       //in Klassen darf man 
     bottleAmount = 0;
     bottle;
     chickenArray;
-    chicken;
+    // chicken;
     positionChicken;
+
 
     /**
      * this function calls the constructor i.e. sets up the variables and functions of the world class
@@ -58,6 +59,7 @@ class World extends MovableObject {                       //in Klassen darf man 
             }
         }, 1000 / 60);
     }
+
 
     /**
      * This function includes the character class in the world class
@@ -242,6 +244,7 @@ class World extends MovableObject {                       //in Klassen darf man 
         }
     }
 
+
     /**
      * This function adds a bounce animation if the character jumps onto a chicken to kill it
      * @param {Array.<Object>} position - position of the chicken in the enemies array
@@ -272,12 +275,14 @@ class World extends MovableObject {                       //in Klassen darf man 
         game_music.pause();
         this.endboss_kill.pause();
         this.victory_music.play();
+        clearInterval(this.movingInterval);
         document.getElementById('game-title').style.display = "none";
         document.getElementById('canvas').style.display = "none";
         document.getElementById('victory-screen').style.display = "flex";
         document.getElementById('fullscreen').style.display = "none";
 
     }
+
 
     /**
      * This function continously draws all elements onto the canvas after first erasing them

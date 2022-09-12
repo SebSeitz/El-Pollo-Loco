@@ -4,6 +4,8 @@ class Chicken extends MovableObject {
     width = 70;
     energy = 5;
     chicken_dead = new Audio('audio/chicken_kill.mp3');
+    movingInterval;
+
 
 
     IMAGES_WALKING = [
@@ -27,10 +29,10 @@ class Chicken extends MovableObject {
     /**
      * This function animates the chickens and makes them move left
      */
-    animate() {
+
+     animate() {
         this.chickenMovesLeft();
         this.chickenAnimations();
-
     }
 
     /**

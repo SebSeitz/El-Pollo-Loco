@@ -7,6 +7,7 @@ class Character extends MovableObject {
     energy = 50;
     game_music;
     gameover_audio = new Audio('audio/gameover_comment.mp3');
+    chicken = new Chicken();
 
 
     IMAGES_WALKING = [
@@ -74,6 +75,7 @@ class Character extends MovableObject {
 
     world; // Klasse Charakter kann nun auf Objekte in der Klasse world zugreifen, also u.a. auch auf keyboard
     walking_sound = new Audio('audio/walking.mp3');
+    chicken;
 
 
     constructor() {
@@ -215,12 +217,16 @@ class Character extends MovableObject {
         }, 1000 / 60);
     }
 
+
     /**
      * This function stops the game and shows the game over screen
      * @param {interval} interval - the character animation interval
      */
     stopGame(interval) {
         clearInterval(interval);
+        this.world.level.enemies.forEach(Chicken => {
+            clearInterval(Chicken.movingInterval)
+        });
         game_music.pause();
         this.gameover_audio.play();
         document.getElementById('game-title').style.display = "none";

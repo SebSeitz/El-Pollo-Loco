@@ -5,10 +5,12 @@ class MovableObject extends DrawableObject {
     acceleration = 1.8;
     lastHit = 0;
     state = 'walk';
+    movingInterval;
 
     /**
      * This function applies gravity to airborne movable objects, i.e. it makes them fall faster the longer they are falling
      */
+
 
     applyGravity() {
         setInterval(() => {
@@ -18,6 +20,14 @@ class MovableObject extends DrawableObject {
             }
         }, 1000 / 30);
     }
+
+
+
+    /**
+     * This function decreases the x-coordinate the chickens, i.e. makes them move left
+     */
+
+
 
     /**
      * This function returns and value of y that is smaller than 190, meaning the movable object is in the air
@@ -40,9 +50,9 @@ class MovableObject extends DrawableObject {
 
     isColliding(mo) {
         return this.x + this.width > mo.x &&             //this.x+this.width = x-Koordinate rechts unten am Character; mo.x = x-Koordinate links unten am enemy
-            this.y + this.height > mo.y-60 &&
+            this.y + this.height > mo.y - 20 &&
             this.x < mo.x &&
-            this.y < mo.y + mo.height-60
+            this.y < mo.y + mo.height - 60
     }
 
     /**
@@ -101,7 +111,7 @@ class MovableObject extends DrawableObject {
         this.state = value;
         this.currentImage = 0;
     }
-    
+
     /**
      * This function increases the x-coordinate of an object so that it moves to the right
      */
@@ -109,9 +119,9 @@ class MovableObject extends DrawableObject {
         this.x += this.speed;
     }
 
-/**
- * This function decreases the x-coordinate of an object so that it moves to the left
- */
+    /**
+     * This function decreases the x-coordinate of an object so that it moves to the left
+     */
     moveLeft() {
         this.x -= this.speed;
     }
