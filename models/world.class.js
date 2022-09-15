@@ -22,7 +22,6 @@ class World extends MovableObject {                       //in Klassen darf man 
     bottleAmount = 0;
     bottle;
     chickenArray;
-    // chicken;
     positionChicken;
 
 
@@ -75,7 +74,7 @@ class World extends MovableObject {                       //in Klassen darf man 
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 200);
+        }, 130);
     }
 
     /**

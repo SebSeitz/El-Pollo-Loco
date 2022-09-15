@@ -22,6 +22,20 @@ function startGame() {
     console.log('My character is', world['character']);  //Schreibweise world.character auch möglich
 }
 
+function nextLevel(){
+    initLevel2();
+    document.getElementById('victory-screen').style.display = 'none';
+    document.getElementById('canvas').classList.remove('d-none');
+    document.getElementById('game-title').style.display = 'flex';
+    document.getElementById('fullscreen').classList.remove('d-none');
+    document.getElementById('touchpad').classList.remove('d-none');
+    document.getElementById('touchpad').classList.add('touchpad-container');
+    canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
+    game_music.play();
+    game_music.volume = 0.3;
+
+}
 /**
  * This function lets the user return to the start screen
  */

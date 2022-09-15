@@ -50,7 +50,7 @@ class MovableObject extends DrawableObject {
 
     isColliding(mo) {
         return this.x + this.width > mo.x &&             //this.x+this.width = x-Koordinate rechts unten am Character; mo.x = x-Koordinate links unten am enemy
-            this.y + this.height > mo.y - 20 &&
+            this.y + this.height > mo.y - 70 &&
             this.x < mo.x &&
             this.y < mo.y + mo.height - 60
     }

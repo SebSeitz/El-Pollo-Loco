@@ -11,6 +11,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
         rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
 
     <title>El Pollo loco</title>
     <link rel="stylesheet" href="style.css">
@@ -35,6 +38,7 @@
     <script src="models/coin.class.js"></script>
 
     <script src="js/levels/level1.js"></script>
+    <script src="js/levels/level2.js"></script>
     <script src="js/game.js"></script>
 
 
@@ -73,6 +77,7 @@
         <div class="victory-box">
             <span>Great Success!</span>
             <button class="start-button extra-width" onclick="restartGame()">Back to Start Screen</button>
+            <button class="start-button extra-width" onclick="nextLevel()">Next Level</button>
         </div>
 
     </div>
@@ -80,25 +85,21 @@
 
     <h1 id="game-title">El Pollo Loco</h1>
 
-        <canvas id="canvas" width="720px" height="480px" class="d-none"></canvas>
-        <div id="touchpad" class="d-none">
-            <div class="pad-container">
-                -L
-                <button type="button" id="left-pad" class="pad"></button>
-                <button type="button" id="right-pad" class="pad"></button>
-                -R
-            </div>
-            <div class="pad-container">
-                Jump
-                <button type="button" id="jump-pad" class="pad"></button>
-                <button type="button" id="throw-pad" class="pad"></button>
-                Throw
-            </div>
+    <canvas id="canvas" width="720px" height="480px" class="d-none"></canvas>
+    <div id="touchpad" class="d-none">
+        <div class="pad-container">
+            <button type="button" id="left-pad" class="pad">Left</button>
+            <button type="button" id="right-pad" class="pad">Right</button>
         </div>
+        <div class="pad-container">
+            <button type="button" id="jump-pad" class="pad">Jump</button>
+            <button type="button" id="throw-pad" class="pad">Throw</button>
+        </div>
+    </div>
 
-        <div class="fullscreen d-none" id="fullscreen" onclick="getFullscreen()">
-            <img src="img/10.icons/fullscreen.png">
-        </div>
+    <div class="fullscreen d-none" id="fullscreen" onclick="getFullscreen()">
+        <img src="img/10.icons/fullscreen.png">
+    </div>
 
 
 
