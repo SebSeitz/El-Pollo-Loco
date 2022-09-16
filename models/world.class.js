@@ -7,7 +7,9 @@ class World extends MovableObject {                       //in Klassen darf man 
     character_hurt = new Audio('audio/character_hurt.mp3');
     endboss_kill = new Audio('audio/endboss_kill.mp3');
     endboss;
+    level2;
     level = level1;
+    level2endboss;
     ctx;
     canvas;
     keyboard;
@@ -125,7 +127,7 @@ class World extends MovableObject {                       //in Klassen darf man 
      * This function checks the collision between the endboss and the character and updates the lifebar
      */
     checkEndbossCollision() {
-        if (this.endboss.isColliding(this.character) && this.endboss.state != 'dead') {
+        if (this.endboss.isColliding(this.character) || level2.enemies[level2.enemies.length -1].isColliding(this.character) && this.endboss.state != 'dead') {
             this.character.hit();
             this.character_hurt.play();
             this.statusBar.setPercentage(this.character.energy);

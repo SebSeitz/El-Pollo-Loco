@@ -9,6 +9,7 @@ let game_music = new Audio('audio/gamemusic.mp3');
  */
 function startGame() {
     initLevel();
+    initLevel2();
     document.getElementById('start-screen-overlay').style.display = 'none';
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('game-title').style.display = 'flex';
@@ -31,6 +32,7 @@ function nextLevel(){
     document.getElementById('touchpad').classList.remove('d-none');
     document.getElementById('touchpad').classList.add('touchpad-container');
     canvas = document.getElementById('canvas');
+
     world = new World(canvas, keyboard);
     game_music.play();
     game_music.volume = 0.3;
