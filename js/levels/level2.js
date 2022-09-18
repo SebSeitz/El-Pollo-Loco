@@ -1,27 +1,27 @@
 let level2;
-function initLevel2() {
+function initLevel2(yCoordinate, chickenHeight) {
 
     level2 = new Level(
 
         [
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
+            new Chicken(yCoordinate, chickenHeight),
             new Endboss(),
         ],
         [

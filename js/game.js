@@ -2,13 +2,17 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let game_music = new Audio('audio/gamemusic.mp3');
+let height;
+let y;
 
 /**
  * This function hides the start screen overlay and shows the canvas, i.e. starts the game
  *
  */
 function startGame() {
-    initLevel();
+    y = 350;
+    height = 90;
+    initLevel(y, height);
     document.getElementById('start-screen-overlay').style.display = 'none';
     // document.getElementById('victory-screen').classList.add = 'none';
     document.getElementById('canvas').classList.remove('d-none');
@@ -24,7 +28,9 @@ function startGame() {
 }
 
 function nextLevel(){
-    initLevel2();
+    y = 320;
+    height = 130;
+    initLevel2(y, height);
     // document.getElementById('victory-screen').style.display = 'none';
     document.getElementById('start-screen-overlay').style.display = 'none';
     document.getElementById('canvas').style.display = 'flex';
