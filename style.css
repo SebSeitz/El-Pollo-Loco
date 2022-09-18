@@ -72,7 +72,7 @@ canvas {
 }
 
 .victory-screen {
-    display: none;
+    display: flex;
     width: 100vw;
     height: 100vh;
     background-image: url('img/5.Fondo/1.png');
@@ -105,6 +105,7 @@ canvas {
 
 .start-button {
     display: flex;
+    z-index: 2;
     align-items: center;
     justify-content: center;
     bottom: 32px;

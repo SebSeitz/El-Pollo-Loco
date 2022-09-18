@@ -1,4 +1,4 @@
-class World extends MovableObject {                       //in Klassen darf man vor Funktionen nicht mehr "function" schreiben und vor Variablen nicht mehr "let"
+class World {                       //in Klassen darf man vor Funktionen nicht mehr "function" schreiben und vor Variablen nicht mehr "let"
     character = new Character();
     bounce_sound = new Audio('audio/bounce_sound.mp3');
     bottle_sound = new Audio('audio/collectBottle.mp3');
@@ -8,8 +8,7 @@ class World extends MovableObject {                       //in Klassen darf man 
     endboss_kill = new Audio('audio/endboss_kill.mp3');
     endboss;
     level2;
-    level = level1;
-    level2endboss;
+    level;
     ctx;
     canvas;
     keyboard;
@@ -33,14 +32,13 @@ class World extends MovableObject {                       //in Klassen darf man 
      * @param {HTMLCanvasElement} canvas - canvas on which the game is drawn
      * @param {class} keyboard - passing on the keycodes
      */
-    constructor(canvas, keyboard) {
-        super();
+    constructor(canvas, keyboard, level) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.level = level;
         this.endboss = this.level.enemies[this.level.enemies.length - 1];
         this.chickenArray = this.level.enemies.slice(0, -1);
-        //this.movableObjects = [this.endboss, this.chickenArray];
         this.draw();
         this.setWorld(); // um Keyboard an andere Objekte weiterzugeben
         this.run(); //Funktion die regelmäßig kontrolliert, ob Objekte miteinander kollidieren
@@ -127,7 +125,7 @@ class World extends MovableObject {                       //in Klassen darf man 
      * This function checks the collision between the endboss and the character and updates the lifebar
      */
     checkEndbossCollision() {
-        if (this.endboss.isColliding(this.character) || level2.enemies[level2.enemies.length -1].isColliding(this.character) && this.endboss.state != 'dead') {
+        if (this.endboss.isColliding(this.character) && this.endboss.state != 'dead') {
             this.character.hit();
             this.character_hurt.play();
             this.statusBar.setPercentage(this.character.energy);
@@ -276,10 +274,11 @@ class World extends MovableObject {                       //in Klassen darf man 
         game_music.pause();
         this.endboss_kill.pause();
         this.victory_music.play();
-        clearInterval(this.movingInterval);
+        // clearInterval(this.movingInterval);
+        clearInterval(this.character.characterMovementInterval);
         document.getElementById('game-title').style.display = "none";
-        document.getElementById('canvas').style.display = "none";
-        document.getElementById('victory-screen').style.display = "flex";
+        // document.getElementById('canvas').style.display = "none";
+        // document.getElementById('victory-screen').classList.remove = "d-none";
         document.getElementById('fullscreen').style.display = "none";
 
     }

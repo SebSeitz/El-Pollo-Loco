@@ -9,15 +9,15 @@ let game_music = new Audio('audio/gamemusic.mp3');
  */
 function startGame() {
     initLevel();
-    initLevel2();
     document.getElementById('start-screen-overlay').style.display = 'none';
+    // document.getElementById('victory-screen').classList.add = 'none';
     document.getElementById('canvas').classList.remove('d-none');
     document.getElementById('game-title').style.display = 'flex';
     document.getElementById('fullscreen').classList.remove('d-none');
     document.getElementById('touchpad').classList.remove('d-none');
     document.getElementById('touchpad').classList.add('touchpad-container');
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, level1);
     game_music.play();
     game_music.volume = 0.3;
     console.log('My character is', world['character']);  //Schreibweise world.character auch möglich
@@ -25,15 +25,15 @@ function startGame() {
 
 function nextLevel(){
     initLevel2();
-    document.getElementById('victory-screen').style.display = 'none';
-    document.getElementById('canvas').classList.remove('d-none');
+    // document.getElementById('victory-screen').style.display = 'none';
+    document.getElementById('start-screen-overlay').style.display = 'none';
+    document.getElementById('canvas').style.display = 'flex';
     document.getElementById('game-title').style.display = 'flex';
     document.getElementById('fullscreen').classList.remove('d-none');
     document.getElementById('touchpad').classList.remove('d-none');
     document.getElementById('touchpad').classList.add('touchpad-container');
     canvas = document.getElementById('canvas');
-
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, level2);
     game_music.play();
     game_music.volume = 0.3;
 
@@ -78,6 +78,8 @@ window.addEventListener("keydown", (e) => {
     if (e.keyCode == 68) {
         keyboard.D = true;
     }
+    e.preventDefault();
+    return false;
 
 });
 

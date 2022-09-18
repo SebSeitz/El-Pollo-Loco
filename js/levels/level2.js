@@ -17,9 +17,18 @@ function initLevel2() {
             new Chicken(),
             new Chicken(),
             new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
             new Endboss(),
         ],
         [
+            new Cloud(),
+            new Cloud(),
+            new Cloud(),
+            new Cloud(),
             new Cloud(),
         ],
 

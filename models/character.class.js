@@ -8,6 +8,7 @@ class Character extends MovableObject {
     game_music;
     gameover_audio = new Audio('audio/gameover_comment.mp3');
     chicken = new Chicken();
+    characterMovementInterval;
 
 
     IMAGES_WALKING = [
@@ -198,7 +199,7 @@ class Character extends MovableObject {
      * This function starts the character moving according to the keyboard input
      */
     characterMovement() {
-        setInterval(() => {
+        this.characterMovementInterval = setInterval(() => {
             this.walking_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
@@ -227,8 +228,8 @@ class Character extends MovableObject {
         this.world.level.enemies.forEach(Chicken => {
             clearInterval(Chicken.movingInterval)
         });
-        game_music.pause();
-        this.gameover_audio.play();
+        // game_music.pause();
+        // this.gameover_audio.play();
         document.getElementById('game-title').style.display = "none";
         document.getElementById('canvas').style.display = "none";
         document.getElementById('end-screen-overlay').style.display = "flex";

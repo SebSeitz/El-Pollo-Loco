@@ -90,6 +90,7 @@ function getLevelCoins(){
     let collection3 = getCoinsCollection(600, 300);
     let collection4 = getCoinsCollection(1000, 300);
     return collection1.concat(collection2, collection3, collection4);
+
 }
 
 }
