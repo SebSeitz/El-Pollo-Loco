@@ -24,6 +24,7 @@ class World {                       //in Klassen darf man vor Funktionen nicht m
     bottle;
     chickenArray;
     positionChicken;
+    endBossDead;
 
 
     /**
@@ -232,8 +233,7 @@ class World {                       //in Klassen darf man vor Funktionen nicht m
      * This function checks if the endboss is killed and deletes the endboss from the enemies array
      */
     checkIfBossisDead() {
-        if (this.endboss.energy == 0) {
-            this.endboss_kill.play();
+        if (this.endboss.energy == 0 && !this.endBossDead) {
             setTimeout(() => {
                 this.level.enemies.splice(this.level.enemies.length - 1, 1);
             }, 2500);
@@ -271,12 +271,14 @@ class World {                       //in Klassen darf man vor Funktionen nicht m
      * This function calls the victory screen once the endboss is killed
      */
     showVictoryScreen() {
+        this.endBossDead = true;
         game_music.pause();
         this.endboss_kill.pause();
         this.victory_music.play();
         // clearInterval(this.movingInterval);
         clearInterval(this.character.characterMovementInterval);
         document.getElementById('game-title').style.display = "none";
+        document.getElementById('nextLevelButton').classList.remove('d-none');
         // document.getElementById('canvas').style.display = "none";
         // document.getElementById('victory-screen').classList.remove = "d-none";
         document.getElementById('fullscreen').style.display = "none";

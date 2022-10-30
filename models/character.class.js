@@ -228,8 +228,8 @@ class Character extends MovableObject {
         this.world.level.enemies.forEach(Chicken => {
             clearInterval(Chicken.movingInterval)
         });
-        // game_music.pause();
-        // this.gameover_audio.play();
+        game_music.pause();
+        this.gameover_audio.play();
         document.getElementById('game-title').style.display = "none";
         document.getElementById('canvas').style.display = "none";
         document.getElementById('end-screen-overlay').style.display = "flex";

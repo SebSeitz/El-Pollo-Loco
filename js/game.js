@@ -23,15 +23,15 @@ function startGame() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard, level1);
     game_music.play();
-    game_music.volume = 0.3;
     console.log('My character is', world['character']);  //Schreibweise world.character auch möglich
 }
 
 function nextLevel(){
     y = 320;
     height = 130;
+    world.victory_music.pause();
     initLevel2(y, height);
-    // document.getElementById('victory-screen').style.display = 'none';
+    document.getElementById('nextLevelButton').classList.add('d-none');
     document.getElementById('start-screen-overlay').style.display = 'none';
     document.getElementById('canvas').style.display = 'flex';
     document.getElementById('game-title').style.display = 'flex';
@@ -40,6 +40,7 @@ function nextLevel(){
     document.getElementById('touchpad').classList.add('touchpad-container');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard, level2);
+    world.victory_music.currentTime = 0;
     game_music.play();
     game_music.volume = 0.3;
 

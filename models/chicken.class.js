@@ -32,7 +32,7 @@ class Chicken extends MovableObject {
      * This function animates the chickens and makes them move left
      */
 
-     animate() {
+    animate() {
         this.chickenMovesLeft();
         this.chickenAnimations();
     }
@@ -40,7 +40,7 @@ class Chicken extends MovableObject {
     /**
      * This function decreases the x-coordinate the chickens, i.e. makes them move left
      */
-    chickenMovesLeft(){
+    chickenMovesLeft() {
         this.movingInterval = setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
@@ -49,7 +49,7 @@ class Chicken extends MovableObject {
     /**
      * This chicken adds animations to the moving or dead chickens
      */
-    chickenAnimations(){
+    chickenAnimations() {
         setInterval(() => {
             if (this.energy == 0) {
                 this.playAnimation(this.IMAGE_DEAD);
