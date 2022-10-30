@@ -49,7 +49,7 @@
 <body>
     <div class="start-screen-overlay" id="start-screen-overlay">
         <div class="button-box" id="button-box">
-            <button class="start-button" onclick="startGame()">Start Game</button>
+            <button id="startButton" class="start-button" onclick="startGame()">Start Game</button>
             <div class="controls" id="controls">
                 <div class="control-icon">
                     <img src="img/10.icons/left-arrow.png"> Move Left
@@ -73,12 +73,14 @@
         </div>
     </div>
 
-    <!-- <div class="victory-screen" id="victory-screen">
+    <div class="d-none victory-screen" id="victory-screen">
         <div class="victory-box">
-            <span>Great Success!</span> -->
+            <span>Great Success!</span>
+            <div class="victory-buttons">
             <button class="start-button extra-width" onclick="restartGame()">Back to Start Screen</button>
             <button id="nextLevelButton" class="d-none start-button extra-width" onclick="nextLevel()">Next Level</button>
-        <!-- </div> -->
+        </div>
+        </div>
 
     </div>
     </div>

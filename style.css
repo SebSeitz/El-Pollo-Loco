@@ -103,6 +103,13 @@ canvas {
     z-index: 1;
 }
 
+.victory-buttons{
+    display: flex;
+    width: 500px;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
 .start-button {
     display: flex;
     z-index: 2;
@@ -119,7 +126,10 @@ canvas {
     background-color: rgb(185, 46, 46);
     color: white;
     cursor: pointer;
-    animation: zoom-in-zoom-out 1.7s ease infinite;
+}
+
+.start-button:hover{
+    animation: zoom-in-zoom-out 0.8s ease-in-out;
 }
 
 .fullscreen img {

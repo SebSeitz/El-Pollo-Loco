@@ -279,8 +279,8 @@ class World {                       //in Klassen darf man vor Funktionen nicht m
         clearInterval(this.character.characterMovementInterval);
         document.getElementById('game-title').style.display = "none";
         document.getElementById('nextLevelButton').classList.remove('d-none');
-        // document.getElementById('canvas').style.display = "none";
-        // document.getElementById('victory-screen').classList.remove = "d-none";
+        document.getElementById('canvas').style.display = "none";
+        document.getElementById('victory-screen').classList.remove('d-none');
         document.getElementById('fullscreen').style.display = "none";
 
     }
